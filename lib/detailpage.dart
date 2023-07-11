@@ -11,18 +11,16 @@ class DetailPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
+              onPressed: () {
+                Navigator.pop(context);
+              }, //뒤로가기
 
-                }, //뒤로가기
-
-                },
-
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 20,
-                ))
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 20,
+              ),
+            )
           ],
         ),
         title: Text(

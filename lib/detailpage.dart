@@ -11,7 +11,9 @@ class DetailPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 icon: Icon(
                   Icons.arrow_back,
                   color: Colors.black,

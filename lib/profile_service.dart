@@ -32,14 +32,15 @@ class ProfileService extends ChangeNotifier {
       mytype: '열심히 허자',
     ),
     Profile(
-      photo: '사진 url',
+      photo:
+          'https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb9308949-ab1a-4a06-8258-f1b6f60cce90%2FEBE8BF9D-5BD7-4AD4-8FC4-84157068BC52.jpeg?id=26769fd9-5881-44f4-90fb-84c279204552&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1310&userId=&cache=v2',
       name: '김서온',
       mbti: 'ENTP',
       blog: 'https://ahrzosel.tistory.com/',
       mytype: '나는 끝까지 살아남을꺼야',
     ),
     Profile(
-      photo: '사진 url',
+      photo: '사진 u',
       name: '정기현',
       mbti: 'INFP',
       blog: 'https://jkh0013011.tistory.com/',

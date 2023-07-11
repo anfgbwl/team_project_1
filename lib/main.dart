@@ -76,7 +76,9 @@ class MyHomePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DetailPage()));
+                              builder: (context) => DetailPage(
+                                    index: index,
+                                  )));
                     },
                     child: Feed(
                       // 각 arguments의 값을 지정하여, index 위치에 맞게 대입(? 맞으면 값, : 아니면 값)

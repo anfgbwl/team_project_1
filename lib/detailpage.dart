@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
+  const DetailPage({super.key, required int index});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +25,6 @@ class DetailPage extends StatelessWidget {
             "E1I4",
             style: TextStyle(color: Colors.black, fontSize: 20),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.black,
-                ))
-          ],
         ),
         body: Padding(
           padding: EdgeInsets.all(8.0),

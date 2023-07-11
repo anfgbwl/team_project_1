@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final profileService = Provider.of<ProfileService>(context);
 
     return Scaffold(

@@ -16,20 +16,29 @@ class DetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                    size: 20,
-                  ))
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  size: 20,
+                ),
+              )
             ],
           ),
           title: Text(
             "E1I4",
             style: TextStyle(color: Colors.black, fontSize: 20),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.check,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ))
+          ],
         ),
         body: Padding(
           padding: EdgeInsets.all(8.0),

@@ -1,40 +1,36 @@
+import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
+  const DetailPage({super.key, required this.index});
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    ProfileService profileService = context.read<ProfileService>();
+    Profile profile = profileService.profileList[index];
     return Scaffold(
       appBar: AppBar(
         leading: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              }, //뒤로가기
+                onPressed: () {
+                  Navigator.pop(context);
+                }, //뒤로가기
 
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 20,
-              ),
-            )
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 20,
+                ))
           ],
         ),
         title: Text(
           "E1I4",
           style: TextStyle(color: Colors.black, fontSize: 20),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.add,
-                color: Colors.black,
-              ))
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -62,12 +58,12 @@ class DetailPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "이름",
+                                profile.name,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
-                              Text("MBTI"),
-                              Text("자신의 블로그 주소"),
+                              Text(profile.mbti),
+                              Text(profile.blog),
                             ],
                           ),
                         ),
@@ -79,7 +75,7 @@ class DetailPage extends StatelessWidget {
                           alignment: Alignment.center,
                           width: 150,
                           height: 150,
-                          child: Text("사진"),
+                          child: Text(profile.photo),
                         )
                       ],
                     ),

@@ -29,77 +29,103 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProfileService>(builder: (context, ProfileService, child) {
-      List<Profile> profileList = ProfileService.profileList;
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('E1I4에 대하여'),
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            // Align 이랑 ListView를 나란히 놓기 위해 부모 위젯으로 감쌌습니당~!
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 2.0,
-                    ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('E1I4에 대하여'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          // Align 이랑 ListView를 나란히 놓기 위해 부모 위젯으로 감쌌습니당~!
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 2.0,
                   ),
-                  child: GestureDetector(
-                    onTap: () {
-                      const url =
-                          'https://marble-teacher-477.notion.site/11-S-A-c968936e1ac745b6a2a1d1dc59d9fcf6?pvs=4';
-                      launchURL(url);
-                    },
-                    child: Text(
-                      'E1I4가 궁금하시다면?',
-                      style: TextStyle(fontSize: 24, height: 1.5),
-                      textAlign: TextAlign.center,
-                    ),
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    const url =
+                        'https://marble-teacher-477.notion.site/11-S-A-c968936e1ac745b6a2a1d1dc59d9fcf6?pvs=4';
+                    launchURL(url);
+                  },
+                  child: Text(
+                    'E1I4가 궁금하시다면?',
+                    style: TextStyle(fontSize: 24, height: 1.5),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
-              SizedBox(height: 20), // 필요에 따라 공간 추가
-              Expanded(
-                child: ListView.separated(
-                  itemCount: profileList.length,
-                  itemBuilder: (context, index) {
-                    // GestureDetector는 사용자 동작을 감시하는 코드임(대충 클릭하면 어떻게 하겠다 조건을 지정하는 코드)
-                    return GestureDetector(
-                      onTap: () {
-                        // Feed를 눌렀을 때 DetailPage로 이동하는 코드
-                        // !!!!! 상세페이지 작업 시 ListView의 index 값에 따라 다른 값을 보여줘야 함 !!!!!
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(index : index)));
-                      },
-                      child: Feed(
-                        // 각 arguments의 값을 지정하여, index 위치에 맞게 대입(? 맞으면 값, : 아니면 값)
-                        imageUrl: Text(Profile.photo),
-                        name: Text(Profile.name),
-                        mbti: Text(Profile.mbti),
-                        mypage: Text(Profile.mypage),
-                        role: ,
-                      ),
-                    );
-                  },
-                  // 각 Feed 들을 구분하기 위해서 Divider 추가
-                  separatorBuilder: (context, index) {
-                    return Divider();
-                  },
-                ),
-              )
-            ],
-          ),
+            ),
+            SizedBox(height: 20), // 필요에 따라 공간 추가
+            Expanded(
+              child: ListView.separated(
+                // 리스트로 넣는거 실패해서 itemCount 총 5개로 작업
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  // GestureDetector는 사용자 동작을 감시하는 코드임(대충 클릭하면 어떻게 하겠다 조건을 지정하는 코드)
+                  return GestureDetector(
+                    onTap: () {
+                      // Feed를 눌렀을 때 DetailPage로 이동하는 코드
+                      // !!!!! 상세페이지 작업 시 ListView의 index 값에 따라 다른 값을 보여줘야 함 !!!!!
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                    index: index,
+                                  )));
+                    },
+                    child: Feed(
+                      // 각 arguments의 값을 지정하여, index 위치에 맞게 대입(? 맞으면 값, : 아니면 값)
+                      imageUrl: index == 2
+                          ? 'https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb9308949-ab1a-4a06-8258-f1b6f60cce90%2FEBE8BF9D-5BD7-4AD4-8FC4-84157068BC52.jpeg?id=26769fd9-5881-44f4-90fb-84c279204552&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1310&userId=&cache=v2'
+                          : 'https://geojecci.korcham.net/images/no-image01.gif',
+                      name: index == 0
+                          ? '한동연'
+                          : index == 1
+                              ? '김서진'
+                              : index == 2
+                                  ? '김서온'
+                                  : index == 3
+                                      ? '정기현'
+                                      : '차재영',
+                      mbti: index == 0
+                          ? 'INTP'
+                          : index == 1
+                              ? 'ISFP'
+                              : index == 2
+                                  ? 'ENTP'
+                                  : index == 3
+                                      ? 'INFP'
+                                      : 'ISTP',
+                      ambition: index == 0
+                          ? '공부는 마라톤'
+                          : index == 1
+                              ? '열심히 허자'
+                              : index == 2
+                                  ? '나는 끝까지 살아남을꺼야'
+                                  : index == 3
+                                      ? '포기하지 말자'
+                                      : '하면된다',
+                      role: index == 0 ? '팀장' : '팀원',
+                    ),
+                  );
+                },
+                // 각 Feed 들을 구분하기 위해서 Divider 추가
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
+              ),
+            )
+          ],
         ),
-      );
-    });
+      ),
+    );
   }
 
   void launchURL(String url) async {
@@ -119,14 +145,14 @@ class Feed extends StatelessWidget {
     required this.imageUrl,
     required this.name,
     required this.mbti,
-    required this.mypage,
+    required this.ambition,
     required this.role,
   }) : super(key: key);
 
   final String imageUrl;
   final String name;
   final String mbti;
-  final String mypage;
+  final String ambition;
   final String role;
 
   @override
@@ -176,7 +202,7 @@ class Feed extends StatelessWidget {
                 height: 2,
               ),
               Text(
-                mypage,
+                ambition,
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black54,

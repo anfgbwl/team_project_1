@@ -13,7 +13,11 @@ class DetailPage extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.pop(context);
+
+                }, //뒤로가기
+
                 },
+
                 icon: Icon(
                   Icons.arrow_back,
                   color: Colors.black,
@@ -83,7 +87,7 @@ class DetailPage extends StatelessWidget {
                     ),
                     SizedBox(height: 20, width: double.infinity),
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Container(
                         decoration: BoxDecoration(
                             border: Border.all(),

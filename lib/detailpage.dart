@@ -1,10 +1,15 @@
+import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key, required int index});
-
+  const DetailPage({super.key, required this.index});
+  final int index;
   @override
   Widget build(BuildContext context) {
+    ProfileService profileService = context.read<ProfileService>();
+    Profile profile = profileService.profileList[index];
+
     return Scaffold(
         appBar: AppBar(
           leading: Row(
@@ -52,14 +57,14 @@ class DetailPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "이름",
+                                profile.name,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 ),
                               ),
-                              Text("MBTI"),
-                              Text("자신의 블로그 주소"),
+                              Text(profile.mbti),
+                              Text(profile.blog),
                             ],
                           ),
                         ),
@@ -71,7 +76,7 @@ class DetailPage extends StatelessWidget {
                           alignment: Alignment.center,
                           width: 148,
                           height: 150,
-                          child: Text("사진"),
+                          child: Image.network(profile.photo),
                         ),
                       ],
                     ),

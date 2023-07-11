@@ -1,8 +1,21 @@
-import 'dart:async';
+//import 'dart:async';
 
 import 'package:aboutmy_team/detailpage.dart';
+import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProfileService()),
+      ],
+      child: MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -211,8 +224,4 @@ class Feed extends StatelessWidget {
       ],
     );
   }
-}
-
-void main() {
-  runApp(MyApp());
 }

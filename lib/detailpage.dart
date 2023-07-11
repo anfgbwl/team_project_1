@@ -13,7 +13,11 @@ class DetailPage extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.pop(context);
+
                 }, //뒤로가기
+
+                },
+
                 icon: Icon(
                   Icons.arrow_back,
                   color: Colors.black,

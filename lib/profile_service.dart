@@ -21,7 +21,7 @@ class ProfileService extends ChangeNotifier {
   List<Profile> profileList = [
     Profile(
         photo:
-            'https://files.slack.com/files-tmb/T043597JK8V-F05GB2MJLKX-75a92e8a44/_______________1_720.jpg',
+            'https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4a0d8a40-2588-41ae-8ffe-5bf3669ac172%2F%25E1%2584%2589%25E1%2585%25A1%25E1%2584%258C%25E1%2585%25B5%25E1%2586%25AB1.jpeg?id=7c16ca4c-b236-475b-81e8-1d420f6a6ecc&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=770&userId=&cache=v2',
         name: '한동연',
         mbti: 'INTP',
         blog: 'https://progressing.tistory.com/',
@@ -29,7 +29,7 @@ class ProfileService extends ChangeNotifier {
         role: '팀장'),
     Profile(
         photo:
-            'https://files.slack.com/files-tmb/T043597JK8V-F05GSKYLE0H-2501add5fc/p20220604_104815455_d6916fe2-b4ad-482a-9fb0-265d7382a3df_720.jpg',
+            'https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fab88139e-5271-4fea-8351-4e4f5b14ba6f%2FP20220604_104815455_D6916FE2-B4AD-482A-9FB0-265D7382A3DF.jpg?id=a8c97967-9f74-46a0-ba4e-b1059a25bc2f&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1470&userId=&cache=v2',
         name: '김서진',
         mbti: 'ISFP',
         blog: 'zzin2990.tistory.com',
@@ -44,19 +44,21 @@ class ProfileService extends ChangeNotifier {
         mytype: '나는 끝까지 살아남을꺼야',
         role: '팀원'),
     Profile(
-        photo: 'https://geojecci.korcham.net/images/no-image01.gif',
+        photo:
+            'https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fffb89613-e223-4821-b622-80a54008f8a0%2FIMG_5017.jpeg?id=a4ab7c71-9341-43cc-b074-0232752ea4bd&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1470&userId=&cache=v2',
         name: '정기현',
         mbti: 'INFP',
         blog: 'https://jkh0013011.tistory.com/',
         mytype: '포기하지 말자',
         role: '팀원'),
     Profile(
-        photo:
-            'https://files.slack.com/files-tmb/T043597JK8V-F05GGDJUP4L-5d3cb9d4d3/img_2340_720.jpg',
+        photo: 'https://geojecci.korcham.net/images/no-image01.gif',
         name: '차재영',
         mbti: 'ISTP',
         blog: 'https://jblog1229.tistory.com/',
         mytype: '하면된다',
         role: '팀원'),
   ];
+
+  int get length => profileList.length;
 }

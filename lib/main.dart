@@ -13,8 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
 
-  ProfileService profileService = ProfileService();
-  profileService.loadProfileList();
+  // ProfileService profileService = ProfileService();
+  // profileService.loadProfileList();
 
   runApp(
     MultiProvider(
@@ -43,42 +43,50 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final profileService = Provider.of<ProfileService>(context);
+    // final profileService = Provider.of<ProfileService>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('E1I4에 대하여'),
+        elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           // Align 이랑 ListView를 나란히 놓기 위해 부모 위젯으로 감쌌습니당~!
           children: [
             Align(
               alignment: Alignment.topCenter,
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 2.0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 30,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                    // border: Border.all(
+                    //   color: Colors.grey,
+                    //   width: 5.0,
+                    // ),
                   ),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    const url =
-                        'https://marble-teacher-477.notion.site/11-S-A-c968936e1ac745b6a2a1d1dc59d9fcf6?pvs=4';
-                    launchURL(url);
-                  },
-                  child: Text(
-                    'E1I4가 궁금하시다면?',
-                    style: TextStyle(fontSize: 24, height: 1.5),
-                    textAlign: TextAlign.center,
+                  child: GestureDetector(
+                    onTap: () {
+                      const url =
+                          'https://marble-teacher-477.notion.site/11-S-A-c968936e1ac745b6a2a1d1dc59d9fcf6?pvs=4';
+                      launchURL(url);
+                    },
+                    child: Text(
+                      'E1I4가 궁금하시다면?',
+                      style: TextStyle(
+                          fontSize: 18, height: 1.5, color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20), // 필요에 따라 공간 추가
             Expanded(
               child: Consumer<ProfileService>(
                   builder: (context, profileService, index) {
@@ -88,7 +96,7 @@ class MyHomePage extends StatelessWidget {
                     final profile = profileService.profileList[index];
 
                     return ListTile(
-                      contentPadding: EdgeInsets.only(left: 2),
+                      contentPadding: EdgeInsets.only(left: 0),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -148,7 +156,7 @@ class Feed extends StatelessWidget {
             fit: BoxFit.cover, // 위에 가로세로(Box)에 맞춤, 나머지 자르기
           ),
         ),
-        SizedBox(width: 12),
+        SizedBox(width: 14),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,16 +164,13 @@ class Feed extends StatelessWidget {
               Text(
                 profile.name,
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
                 softWrap: false,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(
-                height: 2,
               ),
               Text(
                 profile.mbti,
@@ -176,9 +181,6 @@ class Feed extends StatelessWidget {
                 softWrap: false,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(
-                height: 2,
               ),
               Text(
                 profile.mytype,
@@ -193,9 +195,33 @@ class Feed extends StatelessWidget {
               Row(
                 children: [
                   Spacer(),
-                  Text(
-                    profile.role,
-                    style: TextStyle(color: Colors.black54),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Container(
+                      width: 40,
+                      height: 25,
+                      alignment: Alignment.center,
+                      decoration: profile.role == '팀장'
+                          ? BoxDecoration(
+                              color: Colors.blue.withOpacity(0.3),
+                              border: Border.all(color: Colors.blue),
+                              borderRadius: BorderRadius.circular(5.0),
+                            )
+                          : BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              border: Border.all(color: Colors.black54),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                      child: Text(
+                        profile.role,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: profile.role == '팀장'
+                              ? Colors.blue
+                              : Colors.black54,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               )

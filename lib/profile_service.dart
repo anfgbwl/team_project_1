@@ -61,4 +61,6 @@ class ProfileService extends ChangeNotifier {
   ];
 
   int get length => profileList.length;
+
+  void saveText(int index, String value) {}
 }

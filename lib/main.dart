@@ -4,9 +4,14 @@ import 'package:aboutmy_team/detailpage.dart';
 import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() {
+late SharedPreferences prefs;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  prefs = await SharedPreferences.getInstance();
   runApp(
     MultiProvider(
       providers: [
@@ -73,19 +78,20 @@ class MyHomePage extends StatelessWidget {
                   itemCount: profileService.profileList.length,
                   itemBuilder: (context, index) {
                     final profile = profileService.profileList[index];
-                    // GestureDetector는 사용자 동작을 감시하는 코드임(대충 클릭하면 어떻게 하겠다 조건을 지정하는 코드)
-                    return GestureDetector(
+
+                    return ListTile(
+                      contentPadding: EdgeInsets.only(left: 2),
                       onTap: () {
-                        // Feed를 눌렀을 때 DetailPage로 이동하는 코드
-                        // !!!!! 상세페이지 작업 시 ListView의 index 값에 따라 다른 값을 보여줘야 함 !!!!!
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                      index: index,
-                                    )));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailPage(
+                              index: index,
+                            ),
+                          ),
+                        );
                       },
-                      child: Feed(profile: profile),
+                      title: Feed(profile: profile),
                     );
                   },
                   // 각 Feed 들을 구분하기 위해서 Divider 추가

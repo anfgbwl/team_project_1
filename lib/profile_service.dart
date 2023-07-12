@@ -65,7 +65,7 @@ class ProfileService extends ChangeNotifier {
             'https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fab88139e-5271-4fea-8351-4e4f5b14ba6f%2FP20220604_104815455_D6916FE2-B4AD-482A-9FB0-265D7382A3DF.jpg?id=a8c97967-9f74-46a0-ba4e-b1059a25bc2f&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1470&userId=&cache=v2',
         name: '김서진',
         mbti: 'ISFP',
-        blog: 'zzin2990.tistory.com',
+        blog: 'https://zzin2990.tistory.com',
         mytype: '열심히 허자',
         content: '',
         role: '팀원'),

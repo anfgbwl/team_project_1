@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key, required this.index}) : super(key: key);
@@ -36,6 +37,7 @@ class _DetailPageState extends State<DetailPage> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -86,7 +88,6 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ],
       ),
-
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -155,31 +156,40 @@ class _DetailPageState extends State<DetailPage> {
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.blue,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Icon(
-                          CupertinoIcons.link,
-                          color: Colors.white,
-                          size: 15,
+                  child: GestureDetector(
+                    onTap: () {
+                      final url = profile.blog;
+                      launchURL(url);
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(
+                              CupertinoIcons.link,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                            Text(
+                              "Blog",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          "Blog",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 40, 10, 0),
+                padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
@@ -212,107 +222,15 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
       ),
-
-      // body: SingleChildScrollView(
-      //   child: Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: 8.0),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         SizedBox(height: 15),
-      //         Container(
-      //           margin: EdgeInsets.only(left: 3, right: 3),
-      //           child: Column(
-      //             children: [
-      //               Row(
-      //                 children: [
-      //                   Flexible(
-      //                     flex: 2,
-      //                     child: Container(
-      //                       margin: EdgeInsets.only(right: 10.0),
-      //                       decoration: BoxDecoration(
-      //                         border: Border.all(),
-      //                         borderRadius: BorderRadius.circular(20),
-      //                       ),
-      //                       alignment: Alignment.center,
-      //                       height: 150,
-      //                       child: Column(
-      //                         mainAxisAlignment:
-      //                             MainAxisAlignment.spaceEvenly,
-      //                         crossAxisAlignment: CrossAxisAlignment.start,
-      //                         children: [
-      //                           Text(
-      //                             profile.name,
-      //                             style: TextStyle(
-      //                               fontWeight: FontWeight.bold,
-      //                               fontSize: 30,
-      //                             ),
-      //                           ),
-      //                           Text(profile.mbti),
-      //                           Text(profile.blog),
-      //                         ],
-      //                       ),
-      //                     ),
-      //                   ),
-      //                   Flexible(
-      //                     flex: 1,
-      //                     child: Container(
-      //                       decoration: BoxDecoration(
-      //                         border: Border.all(),
-      //                         borderRadius: BorderRadius.circular(20),
-      //                       ),
-      //                       alignment: Alignment.center, // 가로 크기에 맞춰 세로 크기 설정
-      //                       height: 150,
-      //                       child: ClipRRect(
-      //                         borderRadius: BorderRadius.circular(20),
-      //                         child: Image.network(
-      //                           profile.photo,
-      //                           width:
-      //                               MediaQuery.of(context).size.width * 0.34,
-      //                           height: 150,
-      //                           fit: BoxFit.cover,
-      //                         ),
-      //                       ),
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //               SizedBox(height: 10),
-      //               Container(
-      //                 decoration: BoxDecoration(
-      //                   border: Border.all(),
-      //                   borderRadius: BorderRadius.circular(20),
-      //                 ),
-      //                 width: double.infinity,
-      //                 height: 600,
-      //                 child: GestureDetector(
-      //                   onTap: () {
-      //                     FocusScope.of(context).unfocus();
-      //                   },
-      //                   child: Padding(
-      //                     padding: EdgeInsets.all(15.0),
-      //                     child: TextField(
-      //                       controller: _contentController,
-      //                       decoration: InputDecoration(
-      //                         hintText: "자신의 스타일, 장점, 그 외 TMI",
-      //                         border: InputBorder.none,
-      //                       ),
-      //                       autofocus: false,
-      //                       maxLines: null,
-      //                       expands: true,
-      //                       keyboardType: TextInputType.multiline,
-      //                     ),
-      //                   ),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // )
     );
+  }
+
+  void launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
 

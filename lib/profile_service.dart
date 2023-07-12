@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:aboutmy_team/main.dart';
 import 'package:flutter/cupertino.dart';
 
 class Profile {
@@ -7,6 +10,7 @@ class Profile {
     required this.mbti,
     required this.blog,
     required this.mytype,
+    required this.content,
     required this.role,
   });
   String photo;
@@ -14,10 +18,38 @@ class Profile {
   String mbti;
   String blog;
   String mytype;
+  String content;
   String role;
+
+  Map toJson() {
+    return {
+      'photo': photo,
+      'name': name,
+      'mbti': mbti,
+      'blog': blog,
+      'mytype': mytype,
+      'content': content,
+      'role': role
+    };
+  }
+
+  factory Profile.fromJson(json) {
+    return Profile(
+      photo: json['photo'],
+      name: json['name'],
+      mbti: json['mbti'],
+      blog: json['blog'],
+      mytype: json['mytype'],
+      content: json['content'],
+      role: json['role'],
+    );
+  }
 }
 
 class ProfileService extends ChangeNotifier {
+  ProfileService() {
+    loadProfileList();
+  }
   List<Profile> profileList = [
     Profile(
         photo:
@@ -26,6 +58,7 @@ class ProfileService extends ChangeNotifier {
         mbti: 'INTP',
         blog: 'https://progressing.tistory.com/',
         mytype: '공부는 마라톤',
+        content: '',
         role: '팀장'),
     Profile(
         photo:
@@ -34,6 +67,7 @@ class ProfileService extends ChangeNotifier {
         mbti: 'ISFP',
         blog: 'zzin2990.tistory.com',
         mytype: '열심히 허자',
+        content: '',
         role: '팀원'),
     Profile(
         photo:
@@ -42,6 +76,7 @@ class ProfileService extends ChangeNotifier {
         mbti: 'ENTP',
         blog: 'https://ahrzosel.tistory.com/',
         mytype: '나는 끝까지 살아남을꺼야',
+        content: '',
         role: '팀원'),
     Profile(
         photo:
@@ -50,15 +85,71 @@ class ProfileService extends ChangeNotifier {
         mbti: 'INFP',
         blog: 'https://jkh0013011.tistory.com/',
         mytype: '포기하지 말자',
+        content: '',
         role: '팀원'),
     Profile(
-        photo: 'https://geojecci.korcham.net/images/no-image01.gif',
+        photo:
+            'https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fcb494485-040b-4e51-bdd7-6da8b181f7fe%2FIMG_2340.jpg?table=block&id=c38d7a52-480e-4d6f-827b-12c2c54789ac&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=2000&userId=d9553ac5-8812-493f-8f95-44a8126a6728&cache=v2',
         name: '차재영',
         mbti: 'ISTP',
         blog: 'https://jblog1229.tistory.com/',
+        content: '',
         mytype: '하면된다',
         role: '팀원'),
   ];
+
+  createProfile(
+      {required String photo,
+      required String name,
+      required String mbti,
+      required String blog,
+      required String mytype,
+      required String content,
+      required String role}) {
+    Profile memo = Profile(
+        photo: photo,
+        name: name,
+        mbti: mbti,
+        blog: blog,
+        mytype: mytype,
+        content: content,
+        role: role);
+    profileList.add(memo);
+    notifyListeners(); // Consumer<MemoService>의 builder 부분을 호출해서 화면 새로고침
+    saveProfileList();
+  }
+
+  updateProfile({required int index, required String content}) {
+    Profile memo = profileList[index];
+    memo.content = content;
+    notifyListeners(); // Consumer<MemoService>의 builder 부분을 호출해서 화면 새로고침
+    saveProfileList();
+  }
+
+  deleteProfile({required int index}) {
+    profileList.removeAt(index);
+    notifyListeners();
+    saveProfileList();
+  }
+
+  saveProfileList() {
+    List profileJsonList = profileList.map((memo) => memo.toJson()).toList();
+
+    String jsonString = jsonEncode(profileJsonList);
+
+    prefs.setString('profileList', jsonString);
+  }
+
+  loadProfileList() {
+    String? jsonString = prefs.getString('profileList');
+
+    if (jsonString == null) return; // null 이면 로드하지 않음
+
+    List profileJsonList = jsonDecode(jsonString);
+
+    profileList =
+        profileJsonList.map((json) => Profile.fromJson(json)).toList();
+  }
 
   int get length => profileList.length;
 }

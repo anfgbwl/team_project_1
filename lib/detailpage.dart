@@ -148,11 +148,9 @@ class _DetailPageState extends State<DetailPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Container(
-                  // alignment: Alignment.center,
                   width: 120,
                   height: 30,
                   decoration: BoxDecoration(
-                    // border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.blue,
                   ),
@@ -231,18 +229,5 @@ class _DetailPageState extends State<DetailPage> {
     } else {
       throw 'Could not launch $url';
     }
-  }
-}
-
-class WebViewPage extends StatelessWidget {
-  WebViewPage({super.key, required this.url});
-
-  String url;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: WebView(initialUrl: url),
-    );
   }
 }

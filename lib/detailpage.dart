@@ -2,13 +2,33 @@ import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   const DetailPage({super.key, required this.index});
   final int index;
+
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  final TextEditingController _contentController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _contentController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     ProfileService profileService = context.read<ProfileService>();
-    Profile profile = profileService.profileList[index];
+    Profile profile = profileService.profileList[widget.index];
+    _contentController.text = profile.content;
 
     return Scaffold(
         appBar: AppBar(
@@ -75,11 +95,13 @@ class DetailPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             alignment: Alignment.center, // 가로 크기에 맞춰 세로 크기 설정
+                            width: MediaQuery.of(context).size.width * 0.34,
+                            height: 150,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Image.network(
                                 profile.photo,
-                                width: 146,
+                                width: MediaQuery.of(context).size.width * 0.34,
                                 height: 150,
                                 fit: BoxFit.cover,
                               ),
@@ -94,31 +116,34 @@ class DetailPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         width: double.infinity,
-                        height: 500,
-                        child: Padding(
-                          padding: EdgeInsets.all(15.0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "자신의 스타일, 장점, 그 외 TMI",
-                              border: InputBorder.none,
+                        height: 600,
+                        child: GestureDetector(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: TextField(
+                              controller: _contentController,
+                              decoration: InputDecoration(
+                                hintText: "자신의 스타일, 장점, 그 외 TMI",
+                                border: InputBorder.none,
+                              ),
+                              autofocus: false,
+                              maxLines: null,
+                              expands: true,
+                              keyboardType: TextInputType.multiline,
+
+                              // 코드 추가
+                              onChanged: (text) {
+                                profileService.updateProfile(
+                                    index: widget.index, content: text);
+                              },
                             ),
-                            autofocus: true,
-                            maxLines: null,
-                            expands: true,
-                            keyboardType: TextInputType.multiline,
                           ),
                         ),
                       ),
                     ],
-                  ),
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("수정하기"),
                   ),
                 ),
               ],

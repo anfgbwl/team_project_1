@@ -64,46 +64,51 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       Row(
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 10.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            alignment: Alignment.center,
-                            width: 250,
-                            height: 150,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  profile.name,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                          Flexible(
+                            flex: 2,
+                            child: Container(
+                              margin: EdgeInsets.only(right: 10.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              alignment: Alignment.center,
+                              height: 150,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    profile.name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
                                   ),
-                                ),
-                                Text(profile.mbti),
-                                Text(profile.blog),
-                              ],
+                                  Text(profile.mbti),
+                                  Text(profile.blog),
+                                ],
+                              ),
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            alignment: Alignment.center, // 가로 크기에 맞춰 세로 크기 설정
-                            width: MediaQuery.of(context).size.width * 0.34,
-                            height: 150,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
-                                profile.photo,
-                                width: MediaQuery.of(context).size.width * 0.34,
-                                height: 150,
-                                fit: BoxFit.cover,
+                          Flexible(
+                            flex: 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              alignment: Alignment.center, // 가로 크기에 맞춰 세로 크기 설정
+                              height: 150,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  profile.photo,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.34,
+                                  height: 150,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),

@@ -86,7 +86,6 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ],
       ),
-
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -179,7 +178,7 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 40, 10, 0),
+                padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
@@ -212,106 +211,6 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
       ),
-
-      // body: SingleChildScrollView(
-      //   child: Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: 8.0),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         SizedBox(height: 15),
-      //         Container(
-      //           margin: EdgeInsets.only(left: 3, right: 3),
-      //           child: Column(
-      //             children: [
-      //               Row(
-      //                 children: [
-      //                   Flexible(
-      //                     flex: 2,
-      //                     child: Container(
-      //                       margin: EdgeInsets.only(right: 10.0),
-      //                       decoration: BoxDecoration(
-      //                         border: Border.all(),
-      //                         borderRadius: BorderRadius.circular(20),
-      //                       ),
-      //                       alignment: Alignment.center,
-      //                       height: 150,
-      //                       child: Column(
-      //                         mainAxisAlignment:
-      //                             MainAxisAlignment.spaceEvenly,
-      //                         crossAxisAlignment: CrossAxisAlignment.start,
-      //                         children: [
-      //                           Text(
-      //                             profile.name,
-      //                             style: TextStyle(
-      //                               fontWeight: FontWeight.bold,
-      //                               fontSize: 30,
-      //                             ),
-      //                           ),
-      //                           Text(profile.mbti),
-      //                           Text(profile.blog),
-      //                         ],
-      //                       ),
-      //                     ),
-      //                   ),
-      //                   Flexible(
-      //                     flex: 1,
-      //                     child: Container(
-      //                       decoration: BoxDecoration(
-      //                         border: Border.all(),
-      //                         borderRadius: BorderRadius.circular(20),
-      //                       ),
-      //                       alignment: Alignment.center, // 가로 크기에 맞춰 세로 크기 설정
-      //                       height: 150,
-      //                       child: ClipRRect(
-      //                         borderRadius: BorderRadius.circular(20),
-      //                         child: Image.network(
-      //                           profile.photo,
-      //                           width:
-      //                               MediaQuery.of(context).size.width * 0.34,
-      //                           height: 150,
-      //                           fit: BoxFit.cover,
-      //                         ),
-      //                       ),
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //               SizedBox(height: 10),
-      //               Container(
-      //                 decoration: BoxDecoration(
-      //                   border: Border.all(),
-      //                   borderRadius: BorderRadius.circular(20),
-      //                 ),
-      //                 width: double.infinity,
-      //                 height: 600,
-      //                 child: GestureDetector(
-      //                   onTap: () {
-      //                     FocusScope.of(context).unfocus();
-      //                   },
-      //                   child: Padding(
-      //                     padding: EdgeInsets.all(15.0),
-      //                     child: TextField(
-      //                       controller: _contentController,
-      //                       decoration: InputDecoration(
-      //                         hintText: "자신의 스타일, 장점, 그 외 TMI",
-      //                         border: InputBorder.none,
-      //                       ),
-      //                       autofocus: false,
-      //                       maxLines: null,
-      //                       expands: true,
-      //                       keyboardType: TextInputType.multiline,
-      //                     ),
-      //                   ),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // )
     );
   }
 }

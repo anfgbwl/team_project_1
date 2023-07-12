@@ -1,7 +1,8 @@
 import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key, required this.index}) : super(key: key);
@@ -81,20 +82,6 @@ class _DetailPageState extends State<DetailPage> {
           "E1I4",
           style: TextStyle(color: Colors.black, fontSize: 20),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              if (_isModified) {
-                _saveText(_textFieldController.text);
-                _showSnackBar(context, '수정되었습니다.');
-              }
-            },
-            icon: Icon(
-              Icons.check,
-              color: const Color.fromARGB(255, 255, 255, 255),
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

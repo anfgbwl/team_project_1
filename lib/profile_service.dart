@@ -52,7 +52,8 @@ class ProfileService extends ChangeNotifier {
         mytype: '포기하지 말자',
         role: '팀원'),
     Profile(
-        photo: 'https://geojecci.korcham.net/images/no-image01.gif',
+        photo:
+            'https://teamsparta.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fcb494485-040b-4e51-bdd7-6da8b181f7fe%2FIMG_2340.jpg?id=c38d7a52-480e-4d6f-827b-12c2c54789ac&table=block&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=920&userId=&cache=v2',
         name: '차재영',
         mbti: 'ISTP',
         blog: 'https://jblog1229.tistory.com/',

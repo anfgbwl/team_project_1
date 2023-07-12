@@ -1,6 +1,7 @@
 import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key, required this.index}) : super(key: key);
@@ -33,64 +34,67 @@ class _DetailPageState extends State<DetailPage> {
     Profile profile = profileService.profileList[widget.index];
 
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+        title: Text(
+          "E1I4",
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        actions: [
+          IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              if (_contentController.text != profile.content) {
+                profileService.updateProfile(
+                  index: widget.index,
+                  content: _contentController.text,
+                );
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('저장'),
+                      content: Text('변경되었습니다.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('확인'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
             icon: Icon(
-              Icons.arrow_back,
+              Icons.check,
               color: Colors.white,
-              size: 20,
             ),
           ),
-          title: Text(
-            "E1I4",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          actions: [
-            //저장버튼
-            IconButton(
-              onPressed: () {
-                if (_contentController.text != profile.content) {
-                  profileService.updateProfile(
-                    index: widget.index,
-                    content: _contentController.text,
-                  );
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('저장'),
-                        content: Text('변경되었습니다.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('확인'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              icon: Icon(
-                Icons.check,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 15),
-                Container(
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15),
+              GestureDetector(
+                onTap: () {
+                  launch(profile.blog);
+                },
+                child: Container(
                   margin: EdgeInsets.only(left: 3, right: 3),
                   child: Column(
                     children: [
@@ -130,7 +134,7 @@ class _DetailPageState extends State<DetailPage> {
                                 border: Border.all(),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              alignment: Alignment.center, // 가로 크기에 맞춰 세로 크기 설정
+                              alignment: Alignment.center,
                               height: 150,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
@@ -177,9 +181,11 @@ class _DetailPageState extends State<DetailPage> {
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

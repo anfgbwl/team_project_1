@@ -47,5 +47,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-9848607885167420~7008170286</string>  <!-- 구글 애드몹 id -->
 </dict>
 </plist>

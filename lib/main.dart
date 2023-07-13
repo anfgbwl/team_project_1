@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:aboutmy_team/detailpage.dart';
 import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +13,8 @@ late SharedPreferences prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
+  var debugPrintEnabled = true;
+  MobileAds.instance.initialize();
 
   runApp(
     MultiProvider(
@@ -32,8 +37,33 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final BannerAd myBanner = BannerAd(
+    // Test 광고 ID, 광고 승인받은 후 생성한 광고 unit ID 로 바꾸기
+    adUnitId: Platform.isAndroid
+        ? 'ca-app-pub-3940256099942544/6300978111' // Android ad unit ID
+        : 'ca-app-pub-3940256099942544/2934735716', // iOS ad unit ID
+    size: AdSize.fullBanner,
+    request: AdRequest(),
+    listener: BannerAdListener(
+      onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+      },
+    ),
+  );
+
+  @override
+  void initState() {
+    super.initState(); //initState 에 지정된 로직들을 실행
+    myBanner.load();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +144,19 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: Container(
+        alignment: Alignment.center,
+        width: myBanner.size.width.toDouble(),
+        height: myBanner.size.height.toDouble(),
+        child: AdWidget(ad: myBanner),
+      ),
     );
   }
 
   void launchURL(String url) async {
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';

@@ -2,7 +2,6 @@ import 'package:aboutmy_team/profile_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
@@ -10,10 +9,12 @@ class DetailPage extends StatefulWidget {
   final int index;
 
   @override
+  // ignore: library_private_types_in_public_api
   _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
+  // ignore: prefer_final_fields
   TextEditingController _contentController = TextEditingController();
 
   @override
@@ -224,7 +225,9 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   void launchURL(String url) async {
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';

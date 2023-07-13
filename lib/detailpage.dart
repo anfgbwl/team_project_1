@@ -36,58 +36,58 @@ class _DetailPageState extends State<DetailPage> {
     Profile profile = profileService.profileList[widget.index];
 
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //     icon: Icon(
-      //       Icons.arrow_back,
-      //       color: Colors.white,
-      //       size: 20,
-      //     ),
-      //   ),
-      //   title: Text(
-      //     "Profile",
-      //     style: TextStyle(color: Colors.white, fontSize: 20),
-      //   ),
-      //   actions: [
-      //     //저장버튼
-      //     IconButton(
-      //       onPressed: () {
-      //         if (_contentController.text != profile.content) {
-      //           profileService.updateProfile(
-      //             index: widget.index,
-      //             content: _contentController.text,
-      //           );
-      //           showDialog(
-      //             context: context,
-      //             builder: (BuildContext context) {
-      //               return AlertDialog(
-      //                 title: Text('저장'),
-      //                 content: Text('변경되었습니다.'),
-      //                 actions: [
-      //                   TextButton(
-      //                     onPressed: () {
-      //                       Navigator.of(context).pop();
-      //                     },
-      //                     child: Text('확인'),
-      //                   ),
-      //                 ],
-      //               );
-      //             },
-      //           );
-      //         }
-      //       },
-      //       icon: Icon(
-      //         Icons.check,
-      //         color: Colors.white,
-      //         size: 20,
-      //       ),
-      //     ),
-      //   ],
-      // ),
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+        title: Text(
+          "Profile",
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        actions: [
+          //저장버튼
+          IconButton(
+            onPressed: () {
+              if (_contentController.text != profile.content) {
+                profileService.updateProfile(
+                  index: widget.index,
+                  content: _contentController.text,
+                );
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('저장'),
+                      content: Text('변경되었습니다.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('확인'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+            icon: Icon(
+              Icons.check,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(

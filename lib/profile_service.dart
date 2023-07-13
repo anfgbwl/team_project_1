@@ -98,58 +98,58 @@ class ProfileService extends ChangeNotifier {
         role: '팀원'),
   ];
 
-  // createProfile(
-  //     {required String photo,
-  //     required String name,
-  //     required String mbti,
-  //     required String blog,
-  //     required String mytype,
-  //     required String content,
-  //     required String role}) {
-  //   Profile memo = Profile(
-  //       photo: photo,
-  //       name: name,
-  //       mbti: mbti,
-  //       blog: blog,
-  //       mytype: mytype,
-  //       content: content,
-  //       role: role);
-  //   profileList.add(memo);
-  //   notifyListeners(); // Consumer<MemoService>의 builder 부분을 호출해서 화면 새로고침
-  //   saveProfileList();
-  // }
+  createProfile(
+      {required String photo,
+      required String name,
+      required String mbti,
+      required String blog,
+      required String mytype,
+      required String content,
+      required String role}) {
+    Profile memo = Profile(
+        photo: photo,
+        name: name,
+        mbti: mbti,
+        blog: blog,
+        mytype: mytype,
+        content: content,
+        role: role);
+    profileList.add(memo);
+    notifyListeners(); // Consumer<MemoService>의 builder 부분을 호출해서 화면 새로고침
+    saveProfileList();
+  }
 
-  // updateProfile({required int index, required String content}) {
-  //   Profile memo = profileList[index];
-  //   memo.content = content;
-  //   notifyListeners(); // Consumer<MemoService>의 builder 부분을 호출해서 화면 새로고침
-  //   saveProfileList();
-  // }
+  updateProfile({required int index, required String content}) {
+    Profile memo = profileList[index];
+    memo.content = content;
+    notifyListeners(); // Consumer<MemoService>의 builder 부분을 호출해서 화면 새로고침
+    saveProfileList();
+  }
 
-  // deleteProfile({required int index}) {
-  //   profileList.removeAt(index);
-  //   notifyListeners();
-  //   saveProfileList();
-  // }
+  deleteProfile({required int index}) {
+    profileList.removeAt(index);
+    notifyListeners();
+    saveProfileList();
+  }
 
-  // saveProfileList() {
-  //   List profileJsonList = profileList.map((memo) => memo.toJson()).toList();
+  saveProfileList() {
+    List profileJsonList = profileList.map((memo) => memo.toJson()).toList();
 
-  //   String jsonString = jsonEncode(profileJsonList);
+    String jsonString = jsonEncode(profileJsonList);
 
-  //   prefs.setString('profileList', jsonString);
-  // }
+    prefs.setString('profileList', jsonString);
+  }
 
-  // loadProfileList() {
-  //   String? jsonString = prefs.getString('profileList');
+  loadProfileList() {
+    String? jsonString = prefs.getString('profileList');
 
-  //   if (jsonString == null) return; // null 이면 로드하지 않음
+    if (jsonString == null) return; // null 이면 로드하지 않음
 
-  //   List profileJsonList = jsonDecode(jsonString);
+    List profileJsonList = jsonDecode(jsonString);
 
-  //   profileList =
-  //       profileJsonList.map((json) => Profile.fromJson(json)).toList();
-  // }
+    profileList =
+        profileJsonList.map((json) => Profile.fromJson(json)).toList();
+  }
 
-  // int get length => profileList.length;
+  int get length => profileList.length;
 }

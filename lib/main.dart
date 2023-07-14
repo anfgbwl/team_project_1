@@ -39,7 +39,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('E1I4에 대하여'),
+        title: Text('E1I4'),
         elevation: 0,
       ),
       body: Padding(

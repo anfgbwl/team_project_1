@@ -52,7 +52,7 @@ class MyHomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Container(
                   width: double.infinity,
-                  height: 30,
+                  height: 50,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(.5),
